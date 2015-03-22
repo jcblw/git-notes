@@ -1,0 +1,29 @@
+function git-notes () {
+	CMD=$1
+	CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+	CURRENT_NOTES=".git/notes/${CURRENT_BRANCH}"
+
+	if [ -d .git ]; then;
+	else
+		echo "It seems you are not in a git initialize directory."
+		return
+	fi
+
+	if [ -d .git/notes ]; then;
+	else
+		mkdir .git/notes
+	fi
+
+	if [[ $CMD == "open" ]]; then;
+		touch $CURRENT_NOTES
+		if which xdg-open &> /dev/null; then
+		    xdg-open $CURRENT_NOTES  
+		else
+		    open $CURRENT_NOTES           
+		fi
+	fi
+
+	if [[ $CMD == "read" ]]; then;
+		cat $CURRENT_NOTES;
+	fi
+}
