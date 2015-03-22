@@ -1,0 +1,7 @@
+pwd
+read -p "Hit enter to commit or \"n\" to not commit" -n 1 -r
+echo 
+if [[ $REPLY =~ ^[Nn]$ ]]
+then
+	exit 1
+fi
